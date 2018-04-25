@@ -4,9 +4,10 @@ import abtion.scaffold.common.Response;
 import abtion.scaffold.domain.User;
 import abtion.scaffold.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author abtion
@@ -17,13 +18,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     UserService userService;
 
-
-    @RequestMapping("/{userId}/info")
+    //example of GetMethod
+    @GetMapping("/{userId}/info")
     public Response getUserInfo(@PathVariable int userId) {
-        User user = userService.getUserById(userId);
-        return new Response(0,user);
+        return new Response(0,userService.getUserById(userId));
     }
+
+    @GetMapping("/all")
+    public Response getAllUsers(){
+        return new Response(0,userService.getAllUsers());
+    }
+
+    @GetMapping("/name/{userName}")
+    public Response getUserByName(@PathVariable String userName){
+        return new Response(0,userService.getUserByName(userName));
+    }
+
+    //example of Post Method
+    @PostMapping("/create")
+    public Response createUser(@RequestBody @Valid User user){
+        return new Response(0,userService.createUser(user));
+    }
+
+    //example of Query method
+    @RequestMapping("/query")
+    public Response queryUserInfo(@RequestParam(defaultValue = "1")int id){
+        return new Response(0,userService.getUserById(id));
+    }
+
 }

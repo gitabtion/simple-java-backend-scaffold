@@ -3,6 +3,8 @@ package abtion.scaffold.mapper;
 import abtion.scaffold.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Collection;
+
 /**
  * @author abtion
  * @since 2018/4/19 16:35
@@ -10,8 +12,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper {
-//    Collection<User> getAllUser();
+    Collection<User> getAllUsers();
     User getUserById(int id);
-//    User getUserByName(String name);
-//    void createUser(User user);
+    User getUserByName(String name);
+    int createUser(User user);
 }

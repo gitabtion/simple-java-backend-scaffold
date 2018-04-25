@@ -6,4 +6,17 @@
     <select id="getUserById" resultType="abtion.scaffold.domain.User">
         SELECT * FROM users WHERE id = #{id};
     </select>
+
+    <insert id="createUser" useGeneratedKeys="true" keyProperty="id" parameterType="abtion.scaffold.domain.User">
+        INSERT INTO users(`id`, `name`, `address`, `backup`, `valid`)
+        VALUES (#{id}, #{name}, #{address}, #{backup}, #{valid});
+    </insert>
+
+    <select id="getAllUsers" resultType="abtion.scaffold.domain.User">
+        SELECT * FROM users
+    </select>
+
+    <select id="getUserByName" resultType="abtion.scaffold.domain.User">
+        SELECT * FROM users WHERE name = #{name}
+    </select>
 </mapper>
